@@ -13,7 +13,7 @@ public class NeoTunesManager {
         this.sc = new Scanner(System.in);
         this.controller = new NeoTunesController();
     }
-
+//test
     public static void main(String[] args){
         NeoTunesManager m = new NeoTunesManager();
         m.menu();
