@@ -1,19 +1,24 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Playlist {
     private String name;
     private ArrayList<Audio> audioList;
-    private ArrayList<int [][]> codeMatrix;
-    private int code;
+    private int[][] codeMatrix;
+    private String code;
 
+    private int reproductionNum;
 
-    public Playlist(String name, ArrayList<Audio> audioList, ArrayList<int[][]> codeMatrix, int code) {
+    Random random = new Random();
+
+    public Playlist(String name, String code, int reproductionNum) {
         this.name = name;
-        this.audioList = audioList;
-        this.codeMatrix = codeMatrix;
+        this.codeMatrix = new int[6][6];
         this.code = code;
+        this.reproductionNum = reproductionNum;
+        this.audioList = new ArrayList<Audio>();
     }
 
     public String getName() {
@@ -32,28 +37,40 @@ public class Playlist {
         this.audioList = audioList;
     }
 
-    public ArrayList<int[][]> getCodeMatrix() {
+    public int[][] getCodeMatrix() {
         return codeMatrix;
     }
 
-    public void setCodeMatrix(ArrayList<int[][]> codeMatrix) {
+    public void setCodeMatrix(int[][] codeMatrix) {
         this.codeMatrix = codeMatrix;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public String createMatrix(){
+    public int getReproductionNum() {
+        return reproductionNum;
+    }
+
+    public void setReproductionNum(int reproductionNum) {
+        this.reproductionNum = reproductionNum;
+    }
+
+    public void createMatrix(){
         String out = "";
-        int[][] newMatrix = new int[6][6];
-        codeMatrix.add(newMatrix);
-        out = printNumericMatrix(newMatrix);
-        return out;
+        for(int i = 0; i<codeMatrix.length; i++){
+            for(int j = 0; j<codeMatrix.length; j++){
+                codeMatrix[i][j] = random.nextInt(9);
+            }
+        }
+
+        out = printNumericMatrix(codeMatrix);
+        System.out.println(out);
     }
 
     private String printNumericMatrix(int[][] numMatrix) {
@@ -68,6 +85,38 @@ public class Playlist {
         return print;
     }
 
+    public void addAudio(Audio Song, Audio Podcast){
+        if(Song == null){
+            audioList.add(Podcast);
+        } else if (Podcast == null){
+            audioList.add(Song);
+        } else {
+            audioList.add(Song);
+            audioList.add(Podcast);
+        }
+    }
+    public void remAudio(Audio Song, Audio Podcast){
+        if(Song == null){
+            for(int i=0; i<audioList.size(); i++){
+                if(audioList.isEmpty()){
+                    if(audioList.get(i)==Podcast){
+                        audioList.remove(audioList.get(i));
+                        break;
+                    }
+                }
+            }
+        } else if (Podcast == null){
+            for(int i=0; i<audioList.size(); i++){
+                if(audioList.isEmpty()){
+                    if(audioList.get(i)==Song){
+                        audioList.remove(audioList.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Playlist{" +
@@ -75,6 +124,7 @@ public class Playlist {
                 ", audioList=" + audioList +
                 ", codeMatrix=" + codeMatrix +
                 ", code=" + code +
+                ", reproductionNum=" + reproductionNum +
                 '}';
     }
 }

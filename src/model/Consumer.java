@@ -18,10 +18,12 @@ public abstract class Consumer extends User{
         this.id = id;
     }
 
+
     @Override
     public String toString() {
         return "Consumer{" +
                 "id=" + id +
                 '}';
     }
+
 }

@@ -6,7 +6,7 @@ public class Song extends Audio {
     private double price;
     private int sales;
 
-    public Song(String name, String URL, int duration, int numReproductions, String album, Genre genre, double price, int sales) {
+    public Song(String name, String URL, Duration duration, int numReproductions, String album, Genre genre, double price, int sales) {
         super(name, URL, duration, numReproductions);
         this.album = album;
         this.genre = genre;

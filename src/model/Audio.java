@@ -3,10 +3,10 @@ package model;
 public abstract class Audio {
     private String name;
     private String URL;
-    private int duration;
+    private Duration duration;
     private int numReproductions;
 
-    public Audio(String name, String URL, int duration, int numReproductions) {
+    public Audio(String name, String URL, Duration duration, int numReproductions) {
         super();
         this.name = name;
         this.URL = URL;
@@ -30,11 +30,11 @@ public abstract class Audio {
         this.URL = URL;
     }
 
-    public int getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
